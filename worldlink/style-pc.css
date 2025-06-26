@@ -1,0 +1,158 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.globalNavigation{
+    min-height: 50px;
+    height: 10vh;
+    background-color: #888;
+    color: #fff;
+}
+
+#text {
+    font-size: clamp(16px, 3vh, 100vh);
+    text-align: center;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    margin-top: 10px;
+}
+
+.localNavigation {
+    width: 27.5%;
+    text-align: center;
+    background-color: #888;
+    color: #fff;
+}
+
+.contents {
+    flex: 1;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.nav {
+    display: none;
+}
+
+.member {
+    width: 16.5%;
+    padding-top: 16.5%;
+    margin-top: 3vh;
+    float: left;
+    background: #eee;
+    background-size: cover;
+    position: relative;
+}
+
+
+
+#member_first {
+    margin-left: 2.5vw;
+    --focus: 0;
+    outline: var(--focus);
+}
+
+#member_second,
+#member_third,
+#member_fourth,
+#member_fifth {
+    margin-left: 2vw;
+    --focus: 0;
+    outline: var(--focus);
+}
+
+
+.master {
+    width: 32%;
+    height: 32%;
+    position: absolute;
+    bottom: 6%;
+    right: 0%;
+    background-image: url('https://static.wikitide.net/projectsekaiwiki/b/be/Master_Ranks.png');
+    background-size: 530%;
+    font-size: 0;
+    background-position: 0%;
+    opacity: 0;
+}
+
+.canvas {
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    --bg-image: url('../worldlink/images/canvas_no.png');
+    font-size: 0;
+    background-image: var(--bg-image);
+    background-size: 100%;
+}
+
+.performance {
+    width: 3.7%;
+    padding-top: 3.7%;
+    margin-top: 10px;
+    position: relative;
+    float: left;
+    background-image: url('../worldlink/images/performance.png');
+    background-size: 100%;
+}
+
+#perform_all,
+#perform_first {
+    margin-left: 2.5vw;
+}
+
+#perform_second,
+#perform_third,
+#perform_fourth,
+#perform_fifth {
+    margin-left: 2vw;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    height: 16%;
+    position: absolute;
+    padding-left: 5%;
+    letter-spacing: 2px;
+    bottom: 22%;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 1.5vw;
+    --bg-color: #eee;
+    background-color: rgba(61, 61, 61, 0.85);
+    user-select: none;
+}
+
+.perform_num {
+    width: 12.6%;
+    margin-top: 7px;
+    letter-spacing: 0.2vw;
+    float: left;
+    color: #6c6c6c;
+    font-weight: bold;
+    font-size: 2vw;
+    user-select: none;
+}
+
+#perform_num_first {
+    margin-left: 0.1vw;
+}
+
+#perform_num_all {
+    float: none;
+    margin-left: 6vw;
+}
+
+#perform_num_second,
+#perform_num_third,
+#perform_num_fourth,
+#perform_num_fifth {
+    margin-left: 0.1vw;
+}
