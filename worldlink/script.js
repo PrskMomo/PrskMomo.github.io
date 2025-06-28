@@ -1,4 +1,5 @@
 window.onload = function() {
+
     let WAKU = [["first", 0, 0], ["second", 0, 0], ["third", 0, 0], ["fourth", 0, 0], ["fifth", 0, 0]];
     
     let TEST = [["10000", "20000"]]
@@ -16,6 +17,10 @@ window.onload = function() {
     
   
     });
+
+    
+    
+    setCard(130);
 
     function calcPerformAll(){
         let total = 0;
@@ -144,4 +149,18 @@ window.onload = function() {
         calcPerformAll();
         event.stopPropagation();
     }
+
+    function setCard(value){
+        let cards = document.getElementById('cards');
+        for(let i = 1; i <= value; i++){
+            let new_card = document.createElement('div');
+            new_card.className = "card";
+
+            cards.appendChild(new_card);
+        }
+    }
+
+    fetch("./member_db.json")
+        .then((data) => data.text())
+        .then((res) => console.log(res));
 }

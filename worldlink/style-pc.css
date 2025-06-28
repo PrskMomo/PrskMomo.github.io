@@ -21,11 +21,24 @@ main {
     margin-top: 10px;
 }
 
-.localNavigation {
-    width: 27.5%;
+#cards {
+    width: 29%;
+    max-height: 100vh;
     text-align: center;
-    background-color: #888;
+    background: #888;
     color: #fff;
+    overflow-y: scroll;
+}
+
+.card {
+    width: 73px;
+    height: 73px;
+    margin-top: 3vh;
+    float: left;
+    background: #eee;
+    background-size: cover;
+    margin-left: 10px;
+    
 }
 
 .contents {
