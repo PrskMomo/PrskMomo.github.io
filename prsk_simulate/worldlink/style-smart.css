@@ -85,6 +85,34 @@ main {
     transform: rotate(-45deg);
 }
 
+#cards {
+    width: 98vw;
+    height: 100vh;
+    background: rgba(136, 136, 136, 0.5);
+    position: fixed;
+    margin-left: 10px;
+    left: 100%;
+    z-index: 99;
+    overflow-y: scroll;
+}
+
+#cards.active {
+    left: 0;
+}
+
+.card {
+    width: 73px;
+    height: 73px;
+    margin-top: 3vh;
+    float: left;
+    background: #eee;
+    background-size: cover;
+    margin-left: 10px;
+    background-size: 100%;
+    font-size: 0;
+    
+}
+
 .member {
     width: 16.5%;
     padding-top: 16.5%;
@@ -148,7 +176,7 @@ main {
     position: absolute;
     top: 0%;
     right: 0%;
-    --bg-image: url('../worldlink/images/canvas_no.png');
+    --bg-image: url('../images/canvas_no.png');
     background-image: var(--bg-image);
     background-size: 100%;
     font-size: 0;
@@ -160,7 +188,7 @@ main {
     margin-top: 10px;
     position: relative;
     float: left;
-    background-image: url('../worldlink/images/performance.png');
+    background-image: url('../images/performance.png');
     background-size: 100%;
 }
 

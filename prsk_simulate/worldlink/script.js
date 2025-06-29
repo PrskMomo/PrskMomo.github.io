@@ -1,39 +1,26 @@
-const CARDS = {
-    "1": {
+/*const CARDS = {
+    "sample": {
         "Name": "Ichika",
         "Group": "Leo",
         "Type": "Cool",
         "Rarity": 1,
         "Performance": 8475,
         "ImageLink": "../images/cards/leo/ichika/1.png"
-    },
-    "2": {
-        "Name": "Ichika",
-        "Group": "Leo",
-        "Type": "Happy",
-        "Rarity": 2,
-        "Performance": 18325,
-        "ImageLink": "../images/cards/leo/ichika/2.png"
-    },
-    "3": {
-        "Name": "Ichika",
-        "Group": "Leo",
-        "Type": "Mysterious",
-        "Rarity": 3,
-        "Performance": 30275,
-        "ImageLink": "../images/cards/leo/ichika/3.png"
-    },
-    "4": {
-        "Name": "Ichika",
-        "Group": "Leo",
-        "Type": "Cute",
-        "Rarity": 4,
-        "Performance": 34295,
-        "ImageLink": "../images/cards/leo/ichika/4.png"
     }
-}
+}*/
+
+const CARDS = [{"1": {"Name": "Ichika", "Group": "Leo", "Type": "Cool", "Rarity": 1, "Performance": 8475, "ImageLink": "../images/cards/leo/ichika/1.png"}}]
 
 window.onload = function() {
+
+    const ham = document.querySelector('#drawer_input'); //js-hamburgerの要素を取得し、変数hamに格納
+    const nav = document.querySelector('#cards'); //js-navの要素を取得し、変数navに格納
+
+    ham.addEventListener('click', function () { //ハンバーガーメニューをクリックしたら
+        ham.classList.toggle('active');
+        nav.classList.toggle('active');
+
+    });
 
     let MEMBER = ["first", "second", "third", "fourth", "fifth"];
     let WAKU = [["first", 0], ["second", 0], ["third", 0], ["fourth", 0], ["fifth", 0]];
@@ -50,9 +37,8 @@ window.onload = function() {
   
     });
 
-    
-    
-    setCard(CARDS);
+    setCard(JSON.parse(JSON.stringify(CARDS).replace('[', '').replace(']', '')));
+    //setCard(JSON.parse((String(CARDS))))
 
     function calcPerformAll(){
         let total = 0;

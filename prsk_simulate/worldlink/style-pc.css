@@ -26,7 +26,6 @@ main {
     max-height: 100vh;
     text-align: center;
     background: #888;
-    color: #fff;
     overflow-y: scroll;
 }
 
