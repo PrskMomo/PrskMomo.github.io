@@ -196,12 +196,13 @@ window.onload = function() {
     }
 
     fetch("./member_db.json")
-        .then(function(res){
-            const CardJson = JSON.parse(JSON.stringify(res.text()));
-    
-            setCard(CardJson);
+        .then(function(data){
+            return data.json();
+        })
+
+        .then(function (json) {
+            setCard(json)
         });
-        
     
     function MasterRank(rare, rank){
         let mul = 0;
