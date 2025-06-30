@@ -9,7 +9,7 @@
     }
 }*/
 
-const CARDS = [{"1": {"Name": "Ichika", "Group": "Leo", "Type": "Cool", "Rarity": 1, "Performance": 8475, "ImageLink": "../images/cards/leo/ichika/1.png"}}]
+const CARDS = [{"1": {"Name": "Ichika", "Group": "Leo", "Type": "Cool", "Rarity": 1, "Performance": 8475, "ImageLink": "../images/cards/leo/ichika/1.png"}},{"2": {"Name": "Ichika", "Group": "Leo", "Type": "Happy", "Rarity": 2, "Performance": 18325, "ImageLink": "../images/cards/leo/ichika/2.png"}}]
 
 window.onload = function() {
 
@@ -27,6 +27,8 @@ window.onload = function() {
     let performance = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]; //[perform, master, canvas]
     
     let FOCUS = [""];
+    let FRAMES = ["", "", "", "", ""];
+        
     
     WAKU.forEach(function(element){
         document.getElementById(`member_${element[0]}`).addEventListener("click", function (){ focus(element); });
@@ -37,9 +39,8 @@ window.onload = function() {
   
     });
 
-    setCard(JSON.parse(JSON.stringify(CARDS).replace('[', '').replace(']', '')));
-    //setCard(JSON.parse((String(CARDS))))
-
+    
+    
     function calcPerformAll(){
         let total = 0;
         let All = [];
@@ -65,15 +66,32 @@ window.onload = function() {
         }
     }
 
-    function setImage(waku, imageLink, perform, master, canvas){
+    function setImage(waku, name, imageLink, perform, master, canvas){
+        let frame = MEMBER.indexOf(waku[0]);
         document.getElementById(`member_${waku}`).style.backgroundImage = `url(${imageLink})`;
         document.getElementById(`perform_num_${waku}`).textContent = perform;
 
-        performance[MEMBER.indexOf(waku[0])][0] = perform;
-        performance[MEMBER.indexOf(waku[0])][1] = master;
-        performance[MEMBER.indexOf(waku[0])][2] = canvas;
+        performance[frame][0] = perform;
+        performance[frame][1] = master;
+        performance[frame][2] = canvas;
+
+        FRAMES[frame] = name
+
+        CARDS.forEach(function(v, i){
+            if(FRAMES.some(ele => ele == v[i+1].Name)){
+                document.getElementById(`card${i}`).style.filter = `grayscale(100%)`
+                document.getElementById(`card${i}`).style.pointerEvents = `none`
+            }
+        })
+
+        /*for(let i = 0; i < CARDS.length; i++){
+            
+        }*/
+
+        calcPerformAll();
 
         
+
         /*if(trained){
             if(!element[1]){
                 element[1] = 1;
@@ -85,7 +103,7 @@ window.onload = function() {
             }
         } else {*/
          
-        calcPerformAll();
+        
     }
 
     function setSkill(event, element){
@@ -177,10 +195,13 @@ window.onload = function() {
         event.stopPropagation();
     }
 
-    /*fetch("./member_db.json")
-            .then((data) => data.text())
-            .then((res) => console.log(Object.keys(res).length));
-        */
+    fetch("./member_db.json")
+        .then(function(data){
+            const CardJson = JSON.parse(JSON.stringify(data.text));
+    
+            setCard(CardJson);
+        });
+        
     
     function MasterRank(rare, rank){
         let mul = 0;
@@ -212,23 +233,23 @@ window.onload = function() {
     
     function setCard(json){
         let cards = document.getElementById('cards');
-        for(let i = 1; i <= Object.keys(json).length; i++){
+        for(let i = 0; i < Object.keys(json).length; i++){
             let new_card = document.createElement('div');
             new_card.className = "card";
             new_card.id = `card${i}`;
-            new_card.textContent = `${json[i].Rarity};${json[i].Performance}`;
-            new_card.style.backgroundImage = `url(${json[i].ImageLink})`;
+            new_card.textContent = `${json[i][i+1].Rarity};${json[i][i+1].Performance}`;
+            new_card.style.backgroundImage = `url(${json[i][i+1].ImageLink})`;
             
 
             cards.appendChild(new_card);
         }
 
-        for(let c = 1; c <= document.getElementsByClassName("card").length; c++){
-            document.getElementsByClassName("card")[c-1].addEventListener("click", () => {
-                let rare = json[c].Rarity;
+        for(let c = 0; c < document.getElementsByClassName("card").length; c++){
+            document.getElementsByClassName("card")[c].addEventListener("click", () => {
+                let rare = json[c][c+1].Rarity;
                 let Master = document.getElementById(`master_${FOCUS}`).textContent;
-                setImage(FOCUS, json[c].ImageLink, json[c].Performance, MasterRank(rare, Master), CanvasRank(rare, WAKU[MEMBER.indexOf(FOCUS[0])][2]));
-                WAKU[MEMBER.indexOf(FOCUS[0])][1] = json[c].Rarity;
+                setImage(FOCUS, json[c][c+1].Name, json[c][c+1].ImageLink, json[c][c+1].Performance, MasterRank(rare, Master), CanvasRank(rare, WAKU[MEMBER.indexOf(FOCUS[0])][2]));
+                WAKU[MEMBER.indexOf(FOCUS[0])][1] = json[c][c+1].Rarity;
                 
             });
       
