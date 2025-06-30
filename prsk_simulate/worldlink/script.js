@@ -196,8 +196,8 @@ window.onload = function() {
     }
 
     fetch("./member_db.json")
-        .then(function(data){
-            const CardJson = JSON.parse(JSON.stringify(data.text));
+        .then(function(res){
+            const CardJson = JSON.parse(JSON.stringify(res.text()));
     
             setCard(CardJson);
         });
