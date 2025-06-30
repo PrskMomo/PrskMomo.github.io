@@ -1,1 +1,4 @@
-[{"1": {"Name": "Ichika", "Group": "Leo", "Type": "Cool", "Rarity": 1, "Performance": 8475, "ImageLink": "../images/cards/leo/ichika/1.png"}},{"2": {"Name": "Ichika", "Group": "Leo", "Type": "Happy", "Rarity": 2, "Performance": 18325, "ImageLink": "../images/cards/leo/ichika/2.png"}}]
+[
+	{"1": {"Name": "Ichika", "Group": "Leo", "Type": "Cool", "Rarity": 1, "Performance": 8475, "ImageLink": "../images/cards/leo/ichika/1.png"}},
+	{"2": {"Name": "Ichika", "Group": "Leo", "Type": "Happy", "Rarity": 2, "Performance": 18325, "ImageLink": "../images/cards/leo/ichika/2.png"}}
+]

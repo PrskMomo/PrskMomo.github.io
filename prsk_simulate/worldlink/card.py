@@ -15,8 +15,6 @@ dict = {
     "25": ["Kanade", "Mafuyu", "Ena", "Mizuki"]
 }
 
-data = {}
-
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -37,25 +35,29 @@ class App(customtkinter.CTk):
             name_box.set(dict[group_box.get()][0])
 
         def submit():
-            with open("./web/prsk_simulate/worldlink/member_db.json", mode="ab+") as f:
-                data[card_id_box.get()] = {}
-                data[card_id_box.get()]["Name"] = name_box.get()
-                data[card_id_box.get()]["Group"] = group_box.get()
-                data[card_id_box.get()]["Type"] = type_box.get()
-                data[card_id_box.get()]["Rarity"] = rare.get()
-                data[card_id_box.get()]["Performance"] = int(perform_box.get())
-                data[card_id_box.get()]["ImageLink"] = f'../images/cards/{group_box.get().lower()}/{name_box.get().lower()}/{image_box.get()}.png'
-                
-                f.seek(0,2)                                # ファイルの末尾（2）に移動（フォフセット0）  
-                if f.tell() == 0 :                         # ファイルが空かチェック
-                    f.write(json.dumps([data]).encode())   # 空の場合は JSON 配列を書き込む
-                else :
-                    f.seek(-1,2)                           # ファイルの末尾（2）から -1 文字移動
-                    f.truncate()                           # 最後の文字を削除し、JSON 配列を開ける（]の削除）
-                    f.write(','.encode())                # 配列のセパレーターを書き込む
-                    f.write(json.dumps(data).encode())   # 辞書を JSON 形式でダンプ書き込み
-                    f.write(']'.encode())
+            data = {}
+            data[card_id_box.get()] = {}
+            data[card_id_box.get()]["Name"] = name_box.get()
+            data[card_id_box.get()]["Group"] = group_box.get()
+            data[card_id_box.get()]["Type"] = type_box.get()
+            data[card_id_box.get()]["Rarity"] = rare.get()
+            data[card_id_box.get()]["Performance"] = int(perform_box.get())
+            data[card_id_box.get()]["ImageLink"] = f'../images/cards/{group_box.get().lower()}/{name_box.get().lower()}/{image_box.get()}.png'
 
+            with open("./web/prsk_simulate/worldlink/member_db.json", mode="a+") as f:
+                if os.path.getsize("./web/prsk_simulate/worldlink/member_db.json") == 0:
+                    f.write('[\n\t' + json.dumps(data) + '\n]')
+
+                else:
+                    f.seek(0)
+                    txt = f.read().rstrip('\n]')
+                    f.truncate(0)
+                    f.write(txt)
+                    f.write(',\n\t' + json.dumps(data) + '\n]')
+                    
+                data = {}
+                
+                
 
         # CustomTkinter のフォームデザイン設定
         customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
